@@ -4,6 +4,8 @@ Playwright-based end-to-end QA recording infrastructure: drives a real browser t
 
 Extracted from a real project's QA work. `runner.js` and the connection constants in `helpers.js` are generic; everything else (the `examples/` scripts, the app-specific functions in `helpers.js`) is a worked example against one specific app and needs adapting to whatever app you point this at.
 
+If you're driving this with a Claude Code agent, feed it [`SKILL.md`](./SKILL.md) (it's a Claude Code skill file): it describes the workflow (discover flows, get sign-off, record, hard rule on never scripting real credentials) so the agent doesn't have to be re-briefed on the whole approach every time.
+
 ## What's reusable vs. what's an example
 
 | File | Status |
