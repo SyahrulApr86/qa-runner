@@ -36,50 +36,28 @@ specific app that you need to re-point at whatever app you're testing
 Adapt the pattern to the target app rather than importing the reference
 repo's app-specific helpers verbatim.
 
-## Workflow
+## Record
 
-Run this in stages, not all at once, since scope tends to be ambiguous
-until the app has actually been explored:
+One video per flow/scenario, start to finish (not fragmented per-click
+clips). Conventions that make a recording actually watchable instead of a
+blur:
 
-1. **Discover.** If there's no existing test-case list, explore the app
-   (read the codebase's routes/pages, or click through it) and write a
-   markdown list of every end-to-end flow, including pages that are pure
-   display/data (landing pages, dashboards, reports) and not just
-   CRUD/interactive flows, grouped by role if the app has more than one.
-   Show this list to the user before recording anything, since it's much
-   cheaper to fix scope on paper than after recording the wrong thing.
-2. **Record.** One video per flow/scenario, start to finish (not
-   fragmented per-click clips). Conventions that make a recording actually
-   watchable instead of a blur:
-   - ~2 second pause after every page navigation.
-   - Cursor visibly moves to what it's about to click (`smoothClick`) and
-     types character by character (`smoothType`), not instant `.click()`/
-     `.fill()`.
-   - A step that waits on something external (email verification, a
-     webhook, a queue) shows that thing on camera (e.g. actually open
-     MailHog's inbox UI) instead of silently fetching the result via API
-     and jumping straight to the outcome.
-   - 1920x1080, output mp4 (Chromium only records webm; convert with
-     ffmpeg, see the reference runner).
-   - Videos and scripts live in a folder separate from the app's own repo,
-     with a README/summary mapping scenario to video file and pass/fail
-     status.
-3. **Docs (only if asked).** A generated user-manual/docs site from the
-   recorded flows is a separate follow-on step, not assumed by default.
+- ~2 second pause after every page navigation.
+- Cursor visibly moves to what it's about to click (`smoothClick`) and
+  types character by character (`smoothType`), not instant `.click()`/
+  `.fill()`.
+- A step that waits on something external (email verification, a webhook,
+  a queue) shows that thing on camera (e.g. actually open MailHog's inbox
+  UI) instead of silently fetching the result via API and jumping straight
+  to the outcome.
+- 1920x1080, output mp4 (Chromium only records webm; convert with ffmpeg,
+  see the reference runner).
+- Videos and scripts live in a folder separate from the app's own repo,
+  with a README/summary mapping scenario to video file and pass/fail
+  status.
 
-## Hard constraint: credentials
-
-Never type a real human's password into any automation script or tool,
-under any circumstances, including an account the user describes as "a
-test account made just for this." If a flow requires third-party login
-(SSO, OAuth) that can't be driven with a disposable, self-registered
-account, skip it and report that it needs manual testing. A script with a
-real password sitting in a repo is a standing liability regardless of who
-runs it or how the account is described.
-
-Test data otherwise: use accounts the automation creates itself
-(register/API), or pre-existing shared *test* accounts, never real user
-accounts or production data.
+Docs (a generated user-manual/docs site from the recorded flows) is a
+separate follow-on step if asked for, not assumed by default.
 
 ## When the user wants this on a different machine/project
 
